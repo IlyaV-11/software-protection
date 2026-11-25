@@ -1,0 +1,10 @@
+INFO:     Started server process [94731]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8011 (Press CTRL+C to quit)
+INFO:     Sending notification to john-1795609103980@example.com: Welcome, John Doe!
+INFO:     127.0.0.1:64651 - "POST /notify/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64665 - "GET /notifications/ HTTP/1.1" 200 OK
+INFO:     Sending notification to john.demo@example.com: Welcome, John Doe!
+INFO:     127.0.0.1:65077 - "POST /notify/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65081 - "GET /notifications/ HTTP/1.1" 200 OK

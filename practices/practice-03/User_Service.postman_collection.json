@@ -1,0 +1,435 @@
+{
+  "info": {
+    "name": "Шарай ПЗ3 — FastAPI User Service",
+    "description": "Вахрушев И.А., 25-КМ-ИБ2. Запустить оба сервиса, затем Run collection. JWT и пароль создаются в локальных переменных запуска; в файл не сохранены.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8010"
+    },
+    {
+      "key": "notification_url",
+      "value": "http://127.0.0.1:8011"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/health"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Сервис работает\", () => pm.expect(pm.response.json().status).to.eql(\"healthy\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 Signup",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/signup",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{account_email}}\",\n  \"password\": \"{{password}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"account_email\", \"lab-\" + Date.now() + \"@example.com\");",
+              "pm.variables.set(\"password\", \"Lab-\" + pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{account_email}}\",\n  \"password\": \"{{password}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Получен JWT\", () => pm.expect(pm.response.json().token_type).to.eql(\"bearer\"));",
+              "pm.variables.set(\"token\", pm.response.json().access_token);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 Create John",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/users/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john-{{run_id}}@example.com\",\n  \"age\": 25\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"run_id\", Date.now().toString());"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+              "pm.variables.set(\"user_id\", pm.response.json().id);",
+              "pm.test(\"Возраст 25\", () => pm.expect(pm.response.json().age).to.eql(25));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 List users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/users/"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Пользователь в списке\", () => pm.expect(pm.response.json().some(u => u.id === Number(pm.variables.get(\"user_id\")))).to.be.true);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 Get user",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/users/{{user_id}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Имя John Doe\", () => pm.expect(pm.response.json().name).to.eql(\"John Doe\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 PUT without token",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/users/{{user_id}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"John Updated\",\n  \"email\": \"john.updated-{{run_id}}@example.com\",\n  \"age\": 30\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 PUT with JWT",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{base_url}}/users/{{user_id}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"John Updated\",\n  \"email\": \"john.updated-{{run_id}}@example.com\",\n  \"age\": 30\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Возраст изменён на 30\", () => pm.expect(pm.response.json().age).to.eql(30));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "09 Age filter",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/users/?min_age=25"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Все старше 25\", () => pm.expect(pm.response.json().every(u => u.age > 25)).to.be.true);",
+              "pm.test(\"Обновлённый пользователь найден\", () => pm.expect(pm.response.json().some(u => u.id === Number(pm.variables.get(\"user_id\")))).to.be.true);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "10 External posts",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/users/{{user_id}}/posts"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Ответ является списком\", () => pm.expect(pm.response.json()).to.be.an(\"array\"));",
+              "pm.test(\"Публикации относятся к пользователю\", () => pm.expect(pm.response.json().every(p => p.userId === Number(pm.variables.get(\"user_id\")))).to.be.true);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "11 DELETE without token",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{base_url}}/users/{{user_id}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "12 DELETE with JWT",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{base_url}}/users/{{user_id}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Подтверждено удаление\", () => pm.expect(pm.response.json().message).to.include(\"deleted successfully\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "13 DELETE again",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{base_url}}/users/{{user_id}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "14 Invalid data",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/users/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Invalid\",\n  \"email\": \"wrong-email\",\n  \"age\": -1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 422\", () => pm.response.to.have.status(422));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "15 Notifications",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{notification_url}}/notifications/"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Уведомление получено\", () => pm.expect(pm.response.json().some(n => n.user_id === Number(pm.variables.get(\"user_id\")))) .to.be.true);"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

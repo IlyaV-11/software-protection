@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-25",
+  "tool": "Postman 12.38.3 desktop",
+  "requests": 15,
+  "assertions_passed": 27,
+  "assertions_failed": 0,
+  "errors": 0,
+  "duration_ms": 1401,
+  "average_response_ms": 39,
+  "source": "Наблюдение реального запуска в Postman через интерфейс; снимки 01–07.",
+  "statuses": [
+    [
+      "Health",
+      200
+    ],
+    [
+      "Signup",
+      201
+    ],
+    [
+      "Login",
+      200
+    ],
+    [
+      "Create user",
+      201
+    ],
+    [
+      "List users",
+      200
+    ],
+    [
+      "Get user",
+      200
+    ],
+    [
+      "PUT without token",
+      401
+    ],
+    [
+      "PUT with JWT",
+      200
+    ],
+    [
+      "Age filter",
+      200
+    ],
+    [
+      "External posts",
+      200
+    ],
+    [
+      "DELETE without token",
+      401
+    ],
+    [
+      "DELETE with JWT",
+      200
+    ],
+    [
+      "DELETE again",
+      404
+    ],
+    [
+      "Invalid data",
+      422
+    ],
+    [
+      "Notifications",
+      200
+    ]
+  ]
+}

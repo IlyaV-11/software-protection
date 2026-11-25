@@ -1,0 +1,51 @@
+Практическая 3 — FastAPI, Postman, интеграции
+Вахрушев И.А., 25-КМ-ИБ2
+
+1. Открой эту папку в VS Code.
+2. На этом Mac библиотеки уже установлены в .venv (Python 3.12.14).
+3. Дважды нажми «Запустить сервисы.command» или введи в терминале VS Code:
+   .venv/bin/python run_services.py
+4. Не закрывай терминал. Открой http://127.0.0.1:8010/docs.
+5. В Postman уже есть коллекция «Шарай ПЗ3 — FastAPI User Service».
+   Для переноса используй Import и файл User_Service.postman_collection.json.
+6. Открой коллекцию → Run → Local → 1 iteration → Start run.
+   Ожидаемый результат: 15 запросов, 27 Passed, 0 Failed, 0 Errors.
+   Важно запускать всю коллекцию по порядку: запросы используют JWT и user_id,
+   полученные предыдущими запросами. Пароль создаётся на время запуска автоматически.
+7. Для остановки нажми Ctrl+C в окне запуска.
+
+Порты 8000 и 8001 заняты компонентами Adobe, поэтому использованы 8010 и 8011.
+Уведомления: http://127.0.0.1:8011/notifications/.
+Сервис уведомлений имитирует отправку: сохраняет запрос и пишет сообщение в журнал,
+настоящие письма не отправляются. Данные пользователей и аккаунты хранятся в памяти:
+после перезапуска нужно повторно выполнить коллекцию. JWT действует 30 минут;
+после перезапуска ключ меняется, поэтому нужно заново выполнить signup/login.
+
+Для самостоятельных запросов в Postman:
+- Body → raw → JSON — данные пользователя или email/password для входа;
+- после /login скопировать access_token;
+- для PUT и DELETE: Authorization → Bearer Token → вставить access_token.
+
+На другом компьютере нужен Python 3.10 или новее:
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python run_services.py
+
+Проверки граничных случаев:
+.venv/bin/python -m pip install -r requirements-dev.txt
+.venv/bin/python -m pytest -q
+
+Что взято из методички:
+модели UserBase/UserCreate/User, CRUD, хранилище в памяти, пример John Doe,
+HTTP-вызов Notification Service, проверка Postman и Swagger.
+Что дописано при выполнении:
+фильтрация min_age, /signup и /login с JWT, защита PUT/DELETE,
+внешний API публикаций, обработка ошибок, проверки pytest и коллекция Postman.
+Также исправлена проверка дубликатов email при PUT; .dict() заменён на model_dump().
+
+Файлы для защиты:
+main.py — основная логика; notify_service.py — уведомления;
+run_services.py — только удобный запуск двух процессов;
+test_api.py — отдельные проверки ошибок; evidence/ — фактические результаты;
+Скриншоты/ — снимки из Postman и Swagger.
