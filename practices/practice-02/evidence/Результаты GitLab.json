@@ -1,0 +1,41 @@
+{
+  "project_id": 1,
+  "path_with_namespace": "root/test-project",
+  "web_url": "http://127.0.0.1:8929/root/test-project",
+  "runner_id": 1,
+  "runner_name": "sharay-docker-runner",
+  "runner_status": "online",
+  "runner_tags": [
+    "linux"
+  ],
+  "executor": "docker",
+  "image": "alpine:latest",
+  "max_job_timeout_seconds": 600,
+  "pipelines": [
+    {
+      "id": 1,
+      "status": "passed",
+      "ref": "main",
+      "sha": "487d34d60c0a2f77058acf0b0752dfce5b1edaf8",
+      "duration_seconds": 22
+    },
+    {
+      "id": 2,
+      "status": "passed",
+      "ref": "feature/update-readme",
+      "sha": "51756ff2340cf45efdfeb437cb57d6fc1d5c4ee2",
+      "duration_seconds": 8
+    }
+  ],
+  "job_id": 1,
+  "job_result": "Job succeeded",
+  "job_output": "CI/CD is working!",
+  "merge_request": {
+    "iid": 1,
+    "state": "opened",
+    "source_branch": "feature/update-readme",
+    "target_branch": "main",
+    "url": "http://127.0.0.1:8929/root/test-project/-/merge_requests/1"
+  },
+  "password_changed_by_user": true
+}

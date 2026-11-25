@@ -1,0 +1,90 @@
+$ git init -b main
+Initialized empty Git repository in /Users/ezf/Documents/Учеба/Шарай/Практическая 2/test-project/.git/
+
+
+$ git add README.md
+
+
+$ git commit -m Initial commit
+[main (root-commit) d93a36f] Initial commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+
+
+$ git remote add origin ssh://git@127.0.0.1:2222/root/test-project.git
+
+
+$ git push -u origin main
+branch 'main' set up to track 'origin/main'.
+To ssh://127.0.0.1:2222/root/test-project.git
+ * [new branch]      main -> main
+
+
+$ git add hello.txt
+
+
+$ git commit -m feat: add hello.txt
+[main f8d4e56] feat: add hello.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 hello.txt
+
+
+$ git push
+To ssh://127.0.0.1:2222/root/test-project.git
+   d93a36f..f8d4e56  main -> main
+
+
+$ git add .gitlab-ci.yml
+
+
+$ git commit -m ci: add test pipeline
+[main 487d34d] ci: add test pipeline
+ 1 file changed, 9 insertions(+)
+ create mode 100644 .gitlab-ci.yml
+
+
+$ git push
+To ssh://127.0.0.1:2222/root/test-project.git
+   f8d4e56..487d34d  main -> main
+
+
+$ git checkout -b feature/update-readme
+Switched to a new branch 'feature/update-readme'
+
+
+$ git add README.md
+
+
+$ git commit -m docs: add About this project section
+[feature/update-readme 51756ff] docs: add About this project section
+ 1 file changed, 2 insertions(+)
+
+
+$ git push -u origin feature/update-readme
+branch 'feature/update-readme' set up to track 'origin/feature/update-readme'.
+remote: 
+remote: To create a merge request for feature/update-readme, visit:        
+remote:   http://127.0.0.1:8929/root/test-project/-/merge_requests/new?merge_request%5Bsource_branch%5D=feature%2Fupdate-readme        
+remote: 
+To ssh://127.0.0.1:2222/root/test-project.git
+ * [new branch]      feature/update-readme -> feature/update-readme
+
+
+$ git checkout main
+Your branch is up to date with 'origin/main'.
+Switched to branch 'main'
+
+
+$ git fetch origin
+
+
+$ git log --oneline --graph --all
+* 51756ff docs: add About this project section
+* 487d34d ci: add test pipeline
+* f8d4e56 feat: add hello.txt
+* d93a36f Initial commit
+
+
+$ git status --short --branch
+## main...origin/main
+

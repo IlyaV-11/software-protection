@@ -1,0 +1,69 @@
+job1
+Passed
+ Started 1 minute ago by 
+@root
+Passed
+job1
+1
+Running with gitlab-runner 19.6.1 (9afb29f8)
+2
+  on sharay-docker-runner 8TYa66X0G, system ID: s_fd321e405a19
+3
+  UUID: 01a2128b-950e-7727-850d-084ce451ad15
+4
+Preparing the "docker" executor
+00:12
+5
+Using default image
+6
+Using Docker executor with image alpine:latest ...
+7
+Using default image
+8
+Using effective pull policy of [always] for container alpine:latest
+9
+Pulling docker image alpine:latest ...
+10
+Using docker image sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf for alpine:latest with digest alpine@sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf ...
+11
+Preparing environment
+00:01
+12
+Using effective pull policy of [always] for container sha256:2c37b2768011cac3dc442f1ce8462a09b45042742de01b4f017c18b3c22674fb
+13
+Running on runner-8tya66x0g-project-1-concurrent-0 via lima-sharay-gitlab...
+14
+Running on CPU: unknown
+15
+Getting source from Git repository
+00:01
+16
+Gitaly correlation ID: 01M898SXNHRHFZ32NS82XPG820
+17
+Fetching changes with git depth set to 20...
+18
+Initialized empty Git repository in /builds/root/test-project/.git/
+19
+Created fresh repository.
+20
+Checking out 487d34d6 as detached HEAD (ref is main)...
+21
+Skipping Git submodules setup
+22
+Executing "step_script" stage of the job script
+00:01
+23
+Using default image
+24
+Using effective pull policy of [always] for container alpine:latest
+25
+Using docker image sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf for alpine:latest with digest alpine@sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf ...
+26
+$ echo "CI/CD is working!"
+27
+CI/CD is working!
+28
+Cleaning up project directory and file based variables
+00:01
+29
+Job succeeded

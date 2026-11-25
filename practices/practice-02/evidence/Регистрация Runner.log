@@ -1,0 +1,16 @@
+Runtime platform                                  [0;m  arch[0;m=arm64 os[0;m=linux pid[0;m=3477 revision[0;m=9afb29f8 version[0;m=19.6.1
+Running in system-mode.                           [0;m 
+                                                  [0;m 
+Verifying runner... is valid                      [0;m  correlation_id[0;m=01M898S5WJ3BA8ESJS9G6438GT runner[0;m=8TYa66X0G runner_name[0;m=sharay-docker-runner
+Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
+[0;m 
+Configuration (with the authentication token) was saved in "/etc/gitlab-runner/config.toml"[0;m 
+
+gitlab-runner: Service is running
+Runtime platform                                  [0;m  arch[0;m=arm64 os[0;m=linux pid[0;m=3487 revision[0;m=9afb29f8 version[0;m=19.6.1
+
+Runtime platform                                  [0;m  arch[0;m=arm64 os[0;m=linux pid[0;m=3518 revision[0;m=9afb29f8 version[0;m=19.6.1
+Running in system-mode.                           [0;m 
+                                                  [0;m 
+Verifying runner... is valid                      [0;m  correlation_id[0;m=01M898S6DP78DTY1YZ8C3RRBPH runner[0;m=8TYa66X0G runner_name[0;m=sharay-docker-runner
+
