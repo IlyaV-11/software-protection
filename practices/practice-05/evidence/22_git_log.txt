@@ -1,0 +1,6 @@
+$ git log --oneline --decorate --all
+1d77733 (HEAD -> main) feat: add DELETE, parametrized cases and validation tests
+cfa86d9 style: demonstrate automatic formatting at commit
+41a22de feat: add QA Demo with six isolated tests
+
+Exit code: 0

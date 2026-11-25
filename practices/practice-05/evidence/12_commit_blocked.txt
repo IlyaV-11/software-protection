@@ -1,0 +1,18 @@
+$ git commit -m style: demonstrate automatic formatting at commit
+fix end of files.........................................................Passed
+check for added large files..............................................Passed
+trim trailing whitespace.................................................Passed
+check json...........................................(no files to check)Skipped
+black....................................................................Failed
+- hook id: black
+- files were modified by this hook
+
+reformatted src/main.py
+
+All done! ✨ 🍰 ✨
+1 file reformatted.
+
+isort....................................................................Passed
+flake8...................................................................Passed
+
+Exit code: 1

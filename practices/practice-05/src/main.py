@@ -1,0 +1,48 @@
+"""QA Demo из практической работы 5: справочник товаров в памяти."""
+
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, Field
+
+app = FastAPI(title="QA Demo", version="1.0.0")
+
+
+class Item(BaseModel):
+    name: str = Field(min_length=1)
+    price: float = Field(ge=0)
+
+
+items_db: dict[str, Item] = {}
+
+
+@app.get("/")
+async def root():
+    """Проверка доступности приложения."""
+    return {"message": "Hello, QA!"}
+
+
+@app.post("/items/", status_code=201)
+async def create_item(item: Item):
+    if item.name in items_db:
+        raise HTTPException(status_code=400, detail="Item already exists")
+    items_db[item.name] = item
+    return {"message": f"Item {item.name} created"}
+
+
+@app.get("/items/{name}", response_model=Item)
+async def get_item(name: str):
+    if name not in items_db:
+        raise HTTPException(status_code=404, detail="Item not found")
+    return items_db[name]
+
+
+@app.get("/items/", response_model=list[Item])
+async def get_all_items():
+    return list(items_db.values())
+
+
+@app.delete("/items/{name}")
+async def delete_item(name: str):
+    if name not in items_db:
+        raise HTTPException(status_code=404, detail="Item not found")
+    del items_db[name]
+    return {"message": f"Item {name} deleted"}

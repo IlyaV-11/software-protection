@@ -1,0 +1,9 @@
+$ /Users/ezf/Documents/Учеба/Шарай/Практическая 5/.venv/bin/python -m pre_commit run check-json --all-files
+check json...............................................................Failed
+- hook id: check-json
+- exit code: 1
+
+examples/items.json: Failed to json decode (Expecting value: line 1 column 38 (char 37))
+
+
+Exit code: 1

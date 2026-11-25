@@ -1,0 +1,20 @@
+$ /Users/ezf/Documents/Учеба/Шарай/Практическая 5/.venv/bin/python -m pytest
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-9.2.0, pluggy-1.7.0 -- /Users/ezf/Documents/Учеба/Шарай/Практическая 5/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/ezf/Documents/Учеба/Шарай/Практическая 5/qa_demo
+configfile: pyproject.toml
+testpaths: tests
+plugins: platformdirs-4.14.8, cov-7.1.0, anyio-4.16.0
+collecting ... collected 6 items
+
+tests/test_main.py::test_root PASSED                                     [ 16%]
+tests/test_main.py::test_create_item PASSED                              [ 33%]
+tests/test_main.py::test_create_duplicate_item PASSED                    [ 50%]
+tests/test_main.py::test_get_item PASSED                                 [ 66%]
+tests/test_main.py::test_get_non_existent_item PASSED                    [ 83%]
+tests/test_main.py::test_get_all_items PASSED                            [100%]
+
+============================== 6 passed in 0.04s ===============================
+
+Exit code: 0

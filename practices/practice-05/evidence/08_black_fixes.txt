@@ -1,0 +1,12 @@
+$ /Users/ezf/Documents/Учеба/Шарай/Практическая 5/.venv/bin/python -m pre_commit run black --all-files
+black....................................................................Failed
+- hook id: black
+- files were modified by this hook
+
+reformatted src/main.py
+
+All done! ✨ 🍰 ✨
+1 file reformatted, 3 files left unchanged.
+
+
+Exit code: 1

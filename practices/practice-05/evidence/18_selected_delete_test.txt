@@ -1,0 +1,14 @@
+$ /Users/ezf/Documents/Учеба/Шарай/Практическая 5/.venv/bin/python -m pytest tests/test_main.py::test_delete_item
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-9.2.0, pluggy-1.7.0 -- /Users/ezf/Documents/Учеба/Шарай/Практическая 5/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/ezf/Documents/Учеба/Шарай/Практическая 5/qa_demo
+configfile: pyproject.toml
+plugins: platformdirs-4.14.8, cov-7.1.0, anyio-4.16.0
+collecting ... collected 1 item
+
+tests/test_main.py::test_delete_item PASSED                              [100%]
+
+============================== 1 passed in 0.02s ===============================
+
+Exit code: 0

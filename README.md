@@ -13,7 +13,7 @@
 | 2 | [Развёртывание GitLab и GitLab Runner на виртуальной машине](practices/practice-02) |
 | 3 | [FastAPI, Postman, интеграции](practices/practice-03) |
 | 4 | [Apache Kafka, HAProxy, RabbitMQ](practices/practice-04) |
-| 5 | Автоматический контроль качества: pytest, линтеры, форматеры |
+| 5 | [Автоматический контроль качества: pytest, линтеры, форматеры](practices/practice-05) |
 
 Код, инструкции по запуску и результаты каждой работы добавляются в отдельную папку.
 

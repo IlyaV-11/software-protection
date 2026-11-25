@@ -1,0 +1,12 @@
+$ git commit -m feat: add DELETE, parametrized cases and validation tests
+fix end of files.........................................................Passed
+check for added large files..............................................Passed
+trim trailing whitespace.................................................Passed
+check json...........................................(no files to check)Skipped
+black....................................................................Passed
+isort....................................................................Passed
+flake8...................................................................Passed
+[main 1d77733] feat: add DELETE, parametrized cases and validation tests
+ 2 files changed, 52 insertions(+), 3 deletions(-)
+
+Exit code: 0

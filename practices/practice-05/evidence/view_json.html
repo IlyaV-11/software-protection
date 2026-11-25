@@ -1,0 +1,21 @@
+<!doctype html><meta charset="utf-8"><title>JSON: ошибка, исправление и итоговая проверка</title><style>body{font:12px Arial;margin:12px;color:#171717}h1{font-size:17px;margin:8px 0}p{margin:8px 0}pre{font:10.5px/1.22 monospace;white-space:pre-wrap;overflow-wrap:anywhere;border:1px solid #bbb;padding:8px;margin:9px 0}</style><h1>JSON: ошибка, исправление и итоговая проверка</h1><p>Фрагменты сохранённого вывода команд; путь к интерпретатору сокращён до python.</p><pre>$ /Users/ezf/Documents/Учеба/Шарай/Практическая 5/.venv/bin/python -m pre_commit run check-json --all-files
+check json...............................................................Failed
+- hook id: check-json
+- exit code: 1
+
+examples/items.json: Failed to json decode (Expecting value: line 1 column 38 (char 37))
+
+
+Exit code: 1</pre><pre>$ /Users/ezf/Documents/Учеба/Шарай/Практическая 5/.venv/bin/python -m pre_commit run check-json --all-files
+check json...............................................................Passed
+
+Exit code: 0</pre><pre>$ /Users/ezf/Documents/Учеба/Шарай/Практическая 5/.venv/bin/python -m pre_commit run --all-files
+fix end of files.........................................................Passed
+check for added large files..............................................Passed
+trim trailing whitespace.................................................Passed
+check json...............................................................Passed
+black....................................................................Passed
+isort....................................................................Passed
+flake8...................................................................Passed
+
+Exit code: 0</pre>

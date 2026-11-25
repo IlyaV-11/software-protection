@@ -1,0 +1,9 @@
+$ /Users/ezf/Documents/Учеба/Шарай/Практическая 5/.venv/bin/python -m pre_commit run flake8 --all-files
+flake8...................................................................Failed
+- hook id: flake8
+- exit code: 1
+
+src/main.py:3:1: F401 'os' imported but unused
+
+
+Exit code: 1

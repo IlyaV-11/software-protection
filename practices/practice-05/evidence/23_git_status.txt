@@ -1,0 +1,4 @@
+$ git status --short --branch
+## main
+
+Exit code: 0

@@ -1,0 +1,4 @@
+$ git init -b main
+Initialized empty Git repository in /Users/ezf/Documents/Учеба/Шарай/Практическая 5/qa_demo/.git/
+
+Exit code: 0

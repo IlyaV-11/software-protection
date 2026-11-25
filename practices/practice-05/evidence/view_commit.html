@@ -1,0 +1,18 @@
+<!doctype html><meta charset="utf-8"><title>pre-commit: коммит с нарушением стиля остановлен</title><style>body{font:12px Arial;margin:12px;color:#171717}h1{font-size:17px;margin:8px 0}p{margin:8px 0}pre{font:10.5px/1.22 monospace;white-space:pre-wrap;overflow-wrap:anywhere;border:1px solid #bbb;padding:8px;margin:9px 0}</style><h1>pre-commit: коммит с нарушением стиля остановлен</h1><p>Фрагменты сохранённого вывода команд; путь к интерпретатору сокращён до python.</p><pre>$ git commit -m style: demonstrate automatic formatting at commit
+fix end of files.........................................................Passed
+check for added large files..............................................Passed
+trim trailing whitespace.................................................Passed
+check json...........................................(no files to check)Skipped
+black....................................................................Failed
+- hook id: black
+- files were modified by this hook
+
+reformatted src/main.py
+
+All done! ✨ 🍰 ✨
+1 file reformatted.
+
+isort....................................................................Passed
+flake8...................................................................Passed
+
+Exit code: 1</pre>

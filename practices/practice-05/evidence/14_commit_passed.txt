@@ -1,0 +1,12 @@
+$ git commit -m style: demonstrate automatic formatting at commit
+fix end of files.........................................................Passed
+check for added large files..............................................Passed
+trim trailing whitespace.................................................Passed
+check json...........................................(no files to check)Skipped
+black....................................................................Passed
+isort....................................................................Passed
+flake8...................................................................Passed
+[main cfa86d9] style: demonstrate automatic formatting at commit
+ 1 file changed, 1 insertion(+)
+
+Exit code: 0

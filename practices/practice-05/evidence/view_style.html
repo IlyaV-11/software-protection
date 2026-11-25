@@ -1,0 +1,20 @@
+<!doctype html><meta charset="utf-8"><title>Black и Flake8: обнаружение нарушений</title><style>body{font:12px Arial;margin:12px;color:#171717}h1{font-size:17px;margin:8px 0}p{margin:8px 0}pre{font:10.5px/1.22 monospace;white-space:pre-wrap;overflow-wrap:anywhere;border:1px solid #bbb;padding:8px;margin:9px 0}</style><h1>Black и Flake8: обнаружение нарушений</h1><p>Фрагменты сохранённого вывода команд; путь к интерпретатору сокращён до python.</p><pre>$ /Users/ezf/Documents/Учеба/Шарай/Практическая 5/.venv/bin/python -m pre_commit run black --all-files
+black....................................................................Failed
+- hook id: black
+- files were modified by this hook
+
+reformatted src/main.py
+
+All done! ✨ 🍰 ✨
+1 file reformatted, 3 files left unchanged.
+
+
+Exit code: 1</pre><pre>$ /Users/ezf/Documents/Учеба/Шарай/Практическая 5/.venv/bin/python -m pre_commit run flake8 --all-files
+flake8...................................................................Failed
+- hook id: flake8
+- exit code: 1
+
+src/main.py:3:1: F401 &#x27;os&#x27; imported but unused
+
+
+Exit code: 1</pre>

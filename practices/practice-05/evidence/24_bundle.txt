@@ -1,0 +1,3 @@
+$ git bundle create /Users/ezf/Documents/Учеба/Шарай/Практическая 5/qa_demo.bundle --all
+
+Exit code: 0

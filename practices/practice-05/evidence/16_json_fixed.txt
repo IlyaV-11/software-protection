@@ -1,0 +1,4 @@
+$ /Users/ezf/Documents/Учеба/Шарай/Практическая 5/.venv/bin/python -m pre_commit run check-json --all-files
+check json...............................................................Passed
+
+Exit code: 0
