@@ -1,0 +1,399 @@
+{
+  "warmup_pairs": 3,
+  "measured_pairs": 20,
+  "processing_delay_s": 1,
+  "delivery_definition": "Время от начала публикации в Producer до начала обработки в Consumer; общий монотонный таймер ядра ВМ.",
+  "conditions": "Одна ВМ, один Kafka broker через HAProxy, одна RabbitMQ; постоянные сообщения RabbitMQ с publisher confirms; Kafka idempotence и acks=all; по одной паре в обработке.",
+  "summary": {
+    "kafka": {
+      "delivery_ms": {
+        "n": 20,
+        "mean_ms": 4.869,
+        "median_ms": 3.679,
+        "min_ms": 2.569,
+        "max_ms": 16.217,
+        "p95_ms": 11.254
+      },
+      "publish_ms": {
+        "n": 20,
+        "mean_ms": 3.803,
+        "median_ms": 2.612,
+        "min_ms": 1.99,
+        "max_ms": 19.309,
+        "p95_ms": 8.705
+      },
+      "processing_ms": {
+        "n": 20,
+        "mean_ms": 1001.778,
+        "median_ms": 1001.089,
+        "min_ms": 1000.474,
+        "max_ms": 1009.677,
+        "p95_ms": 1002.908
+      },
+      "total_ms": {
+        "n": 20,
+        "mean_ms": 1006.648,
+        "median_ms": 1004.985,
+        "min_ms": 1003.31,
+        "max_ms": 1020.932,
+        "p95_ms": 1017.25
+      }
+    },
+    "rabbitmq": {
+      "delivery_ms": {
+        "n": 20,
+        "mean_ms": 2.03,
+        "median_ms": 1.874,
+        "min_ms": 1.287,
+        "max_ms": 4.592,
+        "p95_ms": 2.813
+      },
+      "publish_ms": {
+        "n": 20,
+        "mean_ms": 2.266,
+        "median_ms": 1.949,
+        "min_ms": 1.359,
+        "max_ms": 6.112,
+        "p95_ms": 3.051
+      },
+      "processing_ms": {
+        "n": 20,
+        "mean_ms": 1001.381,
+        "median_ms": 1001.057,
+        "min_ms": 1000.101,
+        "max_ms": 1004.998,
+        "p95_ms": 1003.354
+      },
+      "total_ms": {
+        "n": 20,
+        "mean_ms": 1003.411,
+        "median_ms": 1002.993,
+        "min_ms": 1001.623,
+        "max_ms": 1007.545,
+        "p95_ms": 1006.167
+      }
+    }
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "transport": "rabbitmq",
+      "delivery_ms": 1.287,
+      "processing_ms": 1002.04,
+      "total_ms": 1003.327,
+      "publish_ms": 1.359
+    },
+    {
+      "sample": 1,
+      "transport": "kafka",
+      "delivery_ms": 3.321,
+      "processing_ms": 1000.732,
+      "total_ms": 1004.053,
+      "publish_ms": 2.266
+    },
+    {
+      "sample": 2,
+      "transport": "kafka",
+      "delivery_ms": 3.719,
+      "processing_ms": 1002.667,
+      "total_ms": 1006.386,
+      "publish_ms": 2.769
+    },
+    {
+      "sample": 2,
+      "transport": "rabbitmq",
+      "delivery_ms": 1.297,
+      "processing_ms": 1001.074,
+      "total_ms": 1002.371,
+      "publish_ms": 1.417
+    },
+    {
+      "sample": 3,
+      "transport": "rabbitmq",
+      "delivery_ms": 2.813,
+      "processing_ms": 1003.354,
+      "total_ms": 1006.167,
+      "publish_ms": 3.012
+    },
+    {
+      "sample": 3,
+      "transport": "kafka",
+      "delivery_ms": 6.098,
+      "processing_ms": 1002.006,
+      "total_ms": 1008.104,
+      "publish_ms": 3.782
+    },
+    {
+      "sample": 4,
+      "transport": "kafka",
+      "delivery_ms": 5.41,
+      "processing_ms": 1001.773,
+      "total_ms": 1007.183,
+      "publish_ms": 3.683
+    },
+    {
+      "sample": 4,
+      "transport": "rabbitmq",
+      "delivery_ms": 1.854,
+      "processing_ms": 1001.046,
+      "total_ms": 1002.9,
+      "publish_ms": 1.925
+    },
+    {
+      "sample": 5,
+      "transport": "rabbitmq",
+      "delivery_ms": 2.268,
+      "processing_ms": 1001.101,
+      "total_ms": 1003.369,
+      "publish_ms": 2.148
+    },
+    {
+      "sample": 5,
+      "transport": "kafka",
+      "delivery_ms": 3.164,
+      "processing_ms": 1001.699,
+      "total_ms": 1004.862,
+      "publish_ms": 2.284
+    },
+    {
+      "sample": 6,
+      "transport": "kafka",
+      "delivery_ms": 4.081,
+      "processing_ms": 1000.725,
+      "total_ms": 1004.806,
+      "publish_ms": 2.455
+    },
+    {
+      "sample": 6,
+      "transport": "rabbitmq",
+      "delivery_ms": 1.775,
+      "processing_ms": 1000.58,
+      "total_ms": 1002.355,
+      "publish_ms": 2.423
+    },
+    {
+      "sample": 7,
+      "transport": "rabbitmq",
+      "delivery_ms": 4.592,
+      "processing_ms": 1000.375,
+      "total_ms": 1004.966,
+      "publish_ms": 6.112
+    },
+    {
+      "sample": 7,
+      "transport": "kafka",
+      "delivery_ms": 16.217,
+      "processing_ms": 1001.033,
+      "total_ms": 1017.25,
+      "publish_ms": 19.309
+    },
+    {
+      "sample": 8,
+      "transport": "kafka",
+      "delivery_ms": 11.254,
+      "processing_ms": 1009.677,
+      "total_ms": 1020.932,
+      "publish_ms": 8.705
+    },
+    {
+      "sample": 8,
+      "transport": "rabbitmq",
+      "delivery_ms": 2.547,
+      "processing_ms": 1004.998,
+      "total_ms": 1007.545,
+      "publish_ms": 3.051
+    },
+    {
+      "sample": 9,
+      "transport": "rabbitmq",
+      "delivery_ms": 1.541,
+      "processing_ms": 1000.927,
+      "total_ms": 1002.468,
+      "publish_ms": 1.671
+    },
+    {
+      "sample": 9,
+      "transport": "kafka",
+      "delivery_ms": 3.453,
+      "processing_ms": 1001.083,
+      "total_ms": 1004.536,
+      "publish_ms": 2.243
+    },
+    {
+      "sample": 10,
+      "transport": "kafka",
+      "delivery_ms": 3.588,
+      "processing_ms": 1002.468,
+      "total_ms": 1006.056,
+      "publish_ms": 2.283
+    },
+    {
+      "sample": 10,
+      "transport": "rabbitmq",
+      "delivery_ms": 1.522,
+      "processing_ms": 1000.101,
+      "total_ms": 1001.623,
+      "publish_ms": 1.57
+    },
+    {
+      "sample": 11,
+      "transport": "rabbitmq",
+      "delivery_ms": 2.598,
+      "processing_ms": 1001.067,
+      "total_ms": 1003.665,
+      "publish_ms": 2.949
+    },
+    {
+      "sample": 11,
+      "transport": "kafka",
+      "delivery_ms": 3.368,
+      "processing_ms": 1000.474,
+      "total_ms": 1003.842,
+      "publish_ms": 2.865
+    },
+    {
+      "sample": 12,
+      "transport": "kafka",
+      "delivery_ms": 3.64,
+      "processing_ms": 1000.809,
+      "total_ms": 1004.45,
+      "publish_ms": 2.432
+    },
+    {
+      "sample": 12,
+      "transport": "rabbitmq",
+      "delivery_ms": 1.708,
+      "processing_ms": 1000.528,
+      "total_ms": 1002.236,
+      "publish_ms": 1.785
+    },
+    {
+      "sample": 13,
+      "transport": "rabbitmq",
+      "delivery_ms": 1.753,
+      "processing_ms": 1001.067,
+      "total_ms": 1002.82,
+      "publish_ms": 1.856
+    },
+    {
+      "sample": 13,
+      "transport": "kafka",
+      "delivery_ms": 2.842,
+      "processing_ms": 1001.687,
+      "total_ms": 1004.53,
+      "publish_ms": 2.142
+    },
+    {
+      "sample": 14,
+      "transport": "kafka",
+      "delivery_ms": 3.782,
+      "processing_ms": 1002.908,
+      "total_ms": 1006.69,
+      "publish_ms": 2.975
+    },
+    {
+      "sample": 14,
+      "transport": "rabbitmq",
+      "delivery_ms": 1.854,
+      "processing_ms": 1000.883,
+      "total_ms": 1002.737,
+      "publish_ms": 1.866
+    },
+    {
+      "sample": 15,
+      "transport": "rabbitmq",
+      "delivery_ms": 1.906,
+      "processing_ms": 1002.621,
+      "total_ms": 1004.527,
+      "publish_ms": 1.946
+    },
+    {
+      "sample": 15,
+      "transport": "kafka",
+      "delivery_ms": 4.14,
+      "processing_ms": 1000.968,
+      "total_ms": 1005.108,
+      "publish_ms": 3.256
+    },
+    {
+      "sample": 16,
+      "transport": "kafka",
+      "delivery_ms": 3.204,
+      "processing_ms": 1001.034,
+      "total_ms": 1004.239,
+      "publish_ms": 2.354
+    },
+    {
+      "sample": 16,
+      "transport": "rabbitmq",
+      "delivery_ms": 1.915,
+      "processing_ms": 1000.775,
+      "total_ms": 1002.689,
+      "publish_ms": 1.952
+    },
+    {
+      "sample": 17,
+      "transport": "rabbitmq",
+      "delivery_ms": 1.977,
+      "processing_ms": 1002.555,
+      "total_ms": 1004.532,
+      "publish_ms": 2.449
+    },
+    {
+      "sample": 17,
+      "transport": "kafka",
+      "delivery_ms": 2.569,
+      "processing_ms": 1000.741,
+      "total_ms": 1003.31,
+      "publish_ms": 1.99
+    },
+    {
+      "sample": 18,
+      "transport": "kafka",
+      "delivery_ms": 3.994,
+      "processing_ms": 1001.21,
+      "total_ms": 1005.203,
+      "publish_ms": 2.954
+    },
+    {
+      "sample": 18,
+      "transport": "rabbitmq",
+      "delivery_ms": 1.46,
+      "processing_ms": 1000.206,
+      "total_ms": 1001.666,
+      "publish_ms": 1.602
+    },
+    {
+      "sample": 19,
+      "transport": "rabbitmq",
+      "delivery_ms": 1.894,
+      "processing_ms": 1001.273,
+      "total_ms": 1003.167,
+      "publish_ms": 2.192
+    },
+    {
+      "sample": 19,
+      "transport": "kafka",
+      "delivery_ms": 3.282,
+      "processing_ms": 1001.094,
+      "total_ms": 1004.377,
+      "publish_ms": 2.43
+    },
+    {
+      "sample": 20,
+      "transport": "kafka",
+      "delivery_ms": 6.259,
+      "processing_ms": 1000.775,
+      "total_ms": 1007.034,
+      "publish_ms": 2.881
+    },
+    {
+      "sample": 20,
+      "transport": "rabbitmq",
+      "delivery_ms": 2.041,
+      "processing_ms": 1001.045,
+      "total_ms": 1003.086,
+      "publish_ms": 2.04
+    }
+  ]
+}

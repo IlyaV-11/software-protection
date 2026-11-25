@@ -1,0 +1,8 @@
+{
+  "status_code": 503,
+  "body": {
+    "detail": "kafka broker unavailable"
+  },
+  "elapsed_s": 5.017,
+  "condition": "Kafka container paused temporarily, then unpaused in finally"
+}

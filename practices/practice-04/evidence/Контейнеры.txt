@@ -1,0 +1,9 @@
+NAME                        IMAGE                                                                     COMMAND                  SERVICE        CREATED         STATUS                     PORTS
+sharay-pz4-consumer-1       sha256:766797550a667e4791247ac703b6112c666ec8275dfe5e6a3d4cbbc9ac1bf3a5   "uvicorn consumer_se…"   consumer       3 minutes ago   Up 2 minutes               127.0.0.1:8021->8001/tcp
+sharay-pz4-haproxy-1        haproxy:3.0.12-alpine                                                     "docker-entrypoint.s…"   haproxy        3 minutes ago   Up 2 minutes
+sharay-pz4-init-storage-1   apache/kafka:3.9.1                                                        "/bin/sh -ec 'chown …"   init-storage   2 minutes ago   Exited (0) 2 minutes ago
+sharay-pz4-init-topics-1    apache/kafka:3.9.1                                                        "/bin/bash -ec '/opt…"   init-topics    3 minutes ago   Exited (0) 2 minutes ago
+sharay-pz4-kafka-1          apache/kafka:3.9.1                                                        "/__cacert_entrypoin…"   kafka          3 minutes ago   Up 2 minutes (healthy)     9092/tcp
+sharay-pz4-kafka-ui-1       provectuslabs/kafka-ui:v0.7.2                                             "/bin/sh -c 'java --…"   kafka-ui       3 minutes ago   Up 2 minutes               127.0.0.1:8088->8080/tcp
+sharay-pz4-producer-1       sha256:26e8c62c59ef8ffd600a5606b26ee88011e5c6dce6c4f725e6289892fe809623   "uvicorn producer_se…"   producer       3 minutes ago   Up 2 minutes               127.0.0.1:8020->8000/tcp
+sharay-pz4-rabbitmq-1       rabbitmq:4.1.0-management                                                 "docker-entrypoint.s…"   rabbitmq       3 minutes ago   Up 3 minutes (healthy)     4369/tcp, 5671-5672/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 127.0.0.1:15672->15672/tcp

@@ -1,0 +1,461 @@
+{
+  "info": {
+    "name": "Шарай ПЗ4 — Kafka HAProxy RabbitMQ",
+    "description": "Вахрушев И.А., 25-КМ-ИБ2. ВМ sharay-messaging, Producer 8020, Consumer 8021. Сначала запустить Docker Compose, затем выполнить всю коллекцию по порядку.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "producer",
+      "value": "http://127.0.0.1:8020"
+    },
+    {
+      "key": "consumer",
+      "value": "http://127.0.0.1:8021"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 Producer health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{producer}}/health"
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"run_id\", \"postman-\" + Date.now());"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Producer работает через HAProxy\", () => pm.expect(pm.response.json().kafka_bootstrap_servers).to.eql(\"haproxy:9093\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 Consumer health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{consumer}}/health"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Consumer healthy\", () => pm.expect(pm.response.json().status).to.eql(\"healthy\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 Kafka send orders",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{producer}}/orders/?run_id={{run_id}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"order_id\": 1,\n  \"user_id\": 100,\n  \"product\": \"Laptop\",\n  \"quantity\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Сообщение принято брокером\", () => pm.expect(pm.response.json().status).to.eql(\"success\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 Kafka send notifications",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{producer}}/notify/?run_id={{run_id}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"user_id\": 100,\n  \"message\": \"Your order has been processed\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Сообщение принято брокером\", () => pm.expect(pm.response.json().status).to.eql(\"success\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 Kafka send errors",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{producer}}/errors/?run_id={{run_id}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"service\": \"payment\",\n  \"message\": \"Payment timeout\",\n  \"severity\": \"error\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Сообщение принято брокером\", () => pm.expect(pm.response.json().status).to.eql(\"success\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 RabbitMQ send orders",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{producer}}/rabbit/orders/?run_id={{run_id}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"order_id\": 1,\n  \"user_id\": 100,\n  \"product\": \"Laptop\",\n  \"quantity\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Сообщение принято брокером\", () => pm.expect(pm.response.json().status).to.eql(\"success\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 RabbitMQ send notifications",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{producer}}/rabbit/notify/?run_id={{run_id}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"user_id\": 100,\n  \"message\": \"Your order has been processed\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Сообщение принято брокером\", () => pm.expect(pm.response.json().status).to.eql(\"success\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 RabbitMQ send errors",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{producer}}/rabbit/errors/?run_id={{run_id}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"service\": \"payment\",\n  \"message\": \"Payment timeout\",\n  \"severity\": \"error\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Сообщение принято брокером\", () => pm.expect(pm.response.json().status).to.eql(\"success\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "09 Kafka received orders",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{consumer}}/orders/"
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "setTimeout(() => {}, 1800);"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const expected = {\"order_id\": 1, \"user_id\": 100, \"product\": \"Laptop\", \"quantity\": 1};",
+              "pm.test(\"Получены переданные данные\", () => pm.expect(pm.response.json().orders.some(row => Object.keys(expected).every(key => row[key] === expected[key]))).to.be.true);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "10 Kafka received notifications",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{consumer}}/notifications/"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const expected = {\"user_id\": 100, \"message\": \"Your order has been processed\"};",
+              "pm.test(\"Получены переданные данные\", () => pm.expect(pm.response.json().notifications.some(row => Object.keys(expected).every(key => row[key] === expected[key]))).to.be.true);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "11 Kafka received errors",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{consumer}}/errors/"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const expected = {\"service\": \"payment\", \"message\": \"Payment timeout\", \"severity\": \"error\"};",
+              "pm.test(\"Получены переданные данные\", () => pm.expect(pm.response.json().errors.some(row => Object.keys(expected).every(key => row[key] === expected[key]))).to.be.true);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "12 RabbitMQ received orders",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{consumer}}/rabbit/orders/"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const expected = {\"order_id\": 1, \"user_id\": 100, \"product\": \"Laptop\", \"quantity\": 1};",
+              "pm.test(\"Получены переданные данные\", () => pm.expect(pm.response.json().orders.some(row => Object.keys(expected).every(key => row[key] === expected[key]))).to.be.true);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "13 RabbitMQ received notifications",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{consumer}}/rabbit/notifications/"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const expected = {\"user_id\": 100, \"message\": \"Your order has been processed\"};",
+              "pm.test(\"Получены переданные данные\", () => pm.expect(pm.response.json().notifications.some(row => Object.keys(expected).every(key => row[key] === expected[key]))).to.be.true);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "14 RabbitMQ received errors",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{consumer}}/rabbit/errors/"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const expected = {\"service\": \"payment\", \"message\": \"Payment timeout\", \"severity\": \"error\"};",
+              "pm.test(\"Получены переданные данные\", () => pm.expect(pm.response.json().errors.some(row => Object.keys(expected).every(key => row[key] === expected[key]))).to.be.true);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "15 Invalid order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{producer}}/orders/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"order_id\": 0,\n  \"user_id\": 100,\n  \"product\": \"Laptop\",\n  \"quantity\": -1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 422\", () => pm.response.to.have.status(422));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "16 End to end events",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{consumer}}/events/?run_id={{run_id}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Все 6 сообщений обработаны\", () => pm.expect(pm.response.json().count).to.eql(6));",
+              "pm.test(\"Оба брокера присутствуют\", () => pm.expect([...new Set(pm.response.json().events.map(e => e.transport))].sort()).to.eql([\"kafka\", \"rabbitmq\"]));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

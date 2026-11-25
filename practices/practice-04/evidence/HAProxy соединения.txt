@@ -1,0 +1,10 @@
+haproxy-1  | [NOTICE]   (1) : New worker (8) forked
+haproxy-1  | [NOTICE]   (1) : Loading success.
+haproxy-1  | 172.18.0.6:57258 [25/Nov/2026:12:34:23.277] kafka_frontend kafka_backend/kafka1 1/0/8 212 -- 1/1/0/0/0 0/0
+haproxy-1  | 172.18.0.6:57262 [25/Nov/2026:12:34:23.286] kafka_frontend kafka_backend/kafka1 1/0/7 592 -- 1/1/0/0/0 0/0
+haproxy-1  | 172.18.0.7:45640 [25/Nov/2026:12:34:23.430] kafka_frontend kafka_backend/kafka1 1/0/3 212 -- 3/3/1/1/0 0/0
+haproxy-1  | 172.18.0.7:45644 [25/Nov/2026:12:34:23.434] kafka_frontend kafka_backend/kafka1 1/0/2 592 -- 2/2/1/1/0 0/0
+haproxy-1  | 172.18.0.7:45664 [25/Nov/2026:12:34:26.908] kafka_frontend kafka_backend/kafka1 1/0/4 1538 -- 4/4/3/3/0 0/0
+haproxy-1  | 172.18.0.7:45680 [25/Nov/2026:12:34:26.913] kafka_frontend kafka_backend/kafka1 1/0/5 1918 -- 4/4/3/3/0 0/0
+haproxy-1  | 172.18.0.7:45716 [25/Nov/2026:12:34:29.942] kafka_frontend kafka_backend/kafka1 1/0/2 1538 -- 6/6/5/5/0 0/0
+haproxy-1  | 172.18.0.7:45722 [25/Nov/2026:12:34:29.945] kafka_frontend kafka_backend/kafka1 1/0/4 1918 -- 6/6/5/5/0 0/0

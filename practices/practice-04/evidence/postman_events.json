@@ -1,0 +1,101 @@
+{
+  "events": [
+    {
+      "event_id": "a89a228b-97fe-4849-a829-a20f6ac7c271",
+      "run_id": "postman-1795610179986",
+      "transport": "kafka",
+      "topic": "orders",
+      "data": {
+        "order_id": 1,
+        "user_id": 100,
+        "product": "Laptop",
+        "quantity": 1
+      },
+      "delivery_ms": 13.429,
+      "processing_ms": 1000.78,
+      "total_ms": 1014.209,
+      "completed_at": "2026-11-25T12:36:21.186097+00:00",
+      "partition": 0,
+      "offset": 7
+    },
+    {
+      "event_id": "2402e757-cc22-4192-bff9-ea55e871e54e",
+      "run_id": "postman-1795610179986",
+      "transport": "kafka",
+      "topic": "notifications",
+      "data": {
+        "user_id": 100,
+        "message": "Your order has been processed"
+      },
+      "delivery_ms": 2.948,
+      "processing_ms": 1000.192,
+      "total_ms": 1003.141,
+      "completed_at": "2026-11-25T12:36:21.206737+00:00",
+      "partition": 0,
+      "offset": 1
+    },
+    {
+      "event_id": "4bbe9702-e99a-43df-b6ed-ae42ae6f6019",
+      "run_id": "postman-1795610179986",
+      "transport": "kafka",
+      "topic": "errors",
+      "data": {
+        "service": "payment",
+        "message": "Payment timeout",
+        "severity": "error"
+      },
+      "delivery_ms": 2.798,
+      "processing_ms": 1001.222,
+      "total_ms": 1004.02,
+      "completed_at": "2026-11-25T12:36:21.240808+00:00",
+      "partition": 0,
+      "offset": 1
+    },
+    {
+      "event_id": "389f58e0-4536-4584-bb3d-0391172e0668",
+      "run_id": "postman-1795610179986",
+      "transport": "rabbitmq",
+      "topic": "orders",
+      "data": {
+        "order_id": 1,
+        "user_id": 100,
+        "product": "Laptop",
+        "quantity": 1
+      },
+      "delivery_ms": 7.198,
+      "processing_ms": 1001.14,
+      "total_ms": 1008.338,
+      "completed_at": "2026-11-25T12:36:21.266317+00:00"
+    },
+    {
+      "event_id": "dc82bc56-0e19-4278-9495-2830dc235592",
+      "run_id": "postman-1795610179986",
+      "transport": "rabbitmq",
+      "topic": "notifications",
+      "data": {
+        "user_id": 100,
+        "message": "Your order has been processed"
+      },
+      "delivery_ms": 5.487,
+      "processing_ms": 1000.722,
+      "total_ms": 1006.209,
+      "completed_at": "2026-11-25T12:36:21.290693+00:00"
+    },
+    {
+      "event_id": "cf0991a7-4ab7-47d8-abe7-83144b0f09d3",
+      "run_id": "postman-1795610179986",
+      "transport": "rabbitmq",
+      "topic": "errors",
+      "data": {
+        "service": "payment",
+        "message": "Payment timeout",
+        "severity": "error"
+      },
+      "delivery_ms": 1.97,
+      "processing_ms": 1000.301,
+      "total_ms": 1002.271,
+      "completed_at": "2026-11-25T12:36:21.322396+00:00"
+    }
+  ],
+  "count": 6
+}

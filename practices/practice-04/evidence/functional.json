@@ -1,0 +1,161 @@
+{
+  "run_id": "functional-e10af45f",
+  "published": [
+    {
+      "status": "success",
+      "transport": "kafka",
+      "topic": "orders",
+      "event_id": "7f95f978-8daa-48ef-a7de-d6e1aa728573",
+      "run_id": "functional-e10af45f",
+      "publish_ms": 17.277,
+      "partition": 2,
+      "offset": 0
+    },
+    {
+      "status": "success",
+      "transport": "kafka",
+      "topic": "notifications",
+      "event_id": "f9a53e4f-3854-4a98-b0bd-37ce07b67fcb",
+      "run_id": "functional-e10af45f",
+      "publish_ms": 3.096,
+      "partition": 0,
+      "offset": 0
+    },
+    {
+      "status": "success",
+      "transport": "kafka",
+      "topic": "errors",
+      "event_id": "aac3a3b6-366f-4083-81bf-2cd84b8e5e4a",
+      "run_id": "functional-e10af45f",
+      "publish_ms": 3.478,
+      "partition": 0,
+      "offset": 0
+    },
+    {
+      "status": "success",
+      "transport": "rabbitmq",
+      "topic": "orders",
+      "event_id": "6216f315-e059-4897-8f3c-d915138cb8ae",
+      "run_id": "functional-e10af45f",
+      "publish_ms": 6.618,
+      "queue": "orders"
+    },
+    {
+      "status": "success",
+      "transport": "rabbitmq",
+      "topic": "notifications",
+      "event_id": "63a55911-8746-448c-93ca-ccc88ed1493f",
+      "run_id": "functional-e10af45f",
+      "publish_ms": 1.411,
+      "queue": "notifications"
+    },
+    {
+      "status": "success",
+      "transport": "rabbitmq",
+      "topic": "errors",
+      "event_id": "bd37fc0d-7cc5-4f48-aa52-3ab13354d6f4",
+      "run_id": "functional-e10af45f",
+      "publish_ms": 1.397,
+      "queue": "errors"
+    }
+  ],
+  "received": [
+    {
+      "event_id": "7f95f978-8daa-48ef-a7de-d6e1aa728573",
+      "run_id": "functional-e10af45f",
+      "transport": "kafka",
+      "topic": "orders",
+      "data": {
+        "order_id": 1,
+        "user_id": 100,
+        "product": "Laptop",
+        "quantity": 1
+      },
+      "delivery_ms": 20.446,
+      "processing_ms": 1002.668,
+      "total_ms": 1023.114,
+      "completed_at": "2026-11-25T12:35:01.729194+00:00",
+      "partition": 2,
+      "offset": 0
+    },
+    {
+      "event_id": "f9a53e4f-3854-4a98-b0bd-37ce07b67fcb",
+      "run_id": "functional-e10af45f",
+      "transport": "kafka",
+      "topic": "notifications",
+      "data": {
+        "user_id": 100,
+        "message": "Your order has been processed"
+      },
+      "delivery_ms": 4.045,
+      "processing_ms": 1000.159,
+      "total_ms": 1004.204,
+      "completed_at": "2026-11-25T12:35:01.732209+00:00",
+      "partition": 0,
+      "offset": 0
+    },
+    {
+      "event_id": "aac3a3b6-366f-4083-81bf-2cd84b8e5e4a",
+      "run_id": "functional-e10af45f",
+      "transport": "kafka",
+      "topic": "errors",
+      "data": {
+        "service": "payment",
+        "message": "Payment timeout",
+        "severity": "error"
+      },
+      "delivery_ms": 7.302,
+      "processing_ms": 1001.493,
+      "total_ms": 1008.795,
+      "completed_at": "2026-11-25T12:35:01.745494+00:00",
+      "partition": 0,
+      "offset": 0
+    },
+    {
+      "event_id": "6216f315-e059-4897-8f3c-d915138cb8ae",
+      "run_id": "functional-e10af45f",
+      "transport": "rabbitmq",
+      "topic": "orders",
+      "data": {
+        "order_id": 1,
+        "user_id": 100,
+        "product": "Laptop",
+        "quantity": 1
+      },
+      "delivery_ms": 6.309,
+      "processing_ms": 1001.217,
+      "total_ms": 1007.525,
+      "completed_at": "2026-11-25T12:35:01.754239+00:00"
+    },
+    {
+      "event_id": "63a55911-8746-448c-93ca-ccc88ed1493f",
+      "run_id": "functional-e10af45f",
+      "transport": "rabbitmq",
+      "topic": "notifications",
+      "data": {
+        "user_id": 100,
+        "message": "Your order has been processed"
+      },
+      "delivery_ms": 1.515,
+      "processing_ms": 1001.881,
+      "total_ms": 1003.396,
+      "completed_at": "2026-11-25T12:35:01.760998+00:00"
+    },
+    {
+      "event_id": "bd37fc0d-7cc5-4f48-aa52-3ab13354d6f4",
+      "run_id": "functional-e10af45f",
+      "transport": "rabbitmq",
+      "topic": "errors",
+      "data": {
+        "service": "payment",
+        "message": "Payment timeout",
+        "severity": "error"
+      },
+      "delivery_ms": 1.821,
+      "processing_ms": 1002.6,
+      "total_ms": 1004.422,
+      "completed_at": "2026-11-25T12:35:01.767142+00:00"
+    }
+  ],
+  "validation_status": 422
+}

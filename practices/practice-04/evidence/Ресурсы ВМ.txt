@@ -1,0 +1,7 @@
+aarch64
+4
+               total        used        free      shared  buff/cache   available
+Mem:            3913        1172         228          17        2512        2544
+Swap:              0           0           0
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda1        20G  4.0G   16G  21% /

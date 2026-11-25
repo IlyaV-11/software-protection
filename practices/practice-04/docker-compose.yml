@@ -1,0 +1,120 @@
+name: sharay-pz4
+services:
+  init-storage:
+    image: apache/kafka:3.9.1
+    user: '0:0'
+    entrypoint: [/bin/sh, -ec]
+    command: ['chown 1000:1000 /tmp/kraft-combined-logs']
+    volumes:
+      - kafka-data:/tmp/kraft-combined-logs
+
+  kafka:
+    image: apache/kafka:3.9.1
+    depends_on:
+      init-storage:
+        condition: service_completed_successfully
+    environment:
+      CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: INTERNAL://:9092,CLIENT://:9094,CONTROLLER://:9095
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,CLIENT://haproxy:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,CLIENT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9095
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+      KAFKA_HEAP_OPTS: -Xms256m -Xmx512m
+    volumes:
+      - kafka-data:/tmp/kraft-combined-logs
+    healthcheck:
+      test: [CMD-SHELL, '/opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --list > /dev/null 2>&1']
+      interval: 10s
+      timeout: 10s
+      retries: 18
+      start_period: 20s
+
+  init-topics:
+    image: apache/kafka:3.9.1
+    depends_on:
+      kafka:
+        condition: service_healthy
+    entrypoint: [/bin/bash, -ec]
+    command:
+      - |
+        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic orders --partitions 3 --replication-factor 1
+        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic notifications --partitions 1 --replication-factor 1
+        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic errors --partitions 1 --replication-factor 1
+
+  haproxy:
+    image: haproxy:3.0.12-alpine
+    depends_on:
+      kafka:
+        condition: service_healthy
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:v0.7.2
+    depends_on:
+      kafka:
+        condition: service_healthy
+    ports: ['127.0.0.1:8088:8080']
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local-kafka
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      JAVA_OPTS: -Xms128m -Xmx256m
+
+  rabbitmq:
+    image: rabbitmq:4.1.0-management
+    hostname: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: lab
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:?Set RABBITMQ_PASSWORD in .env}
+    ports: ['127.0.0.1:15672:15672']
+    volumes:
+      - rabbit-data:/var/lib/rabbitmq
+    healthcheck:
+      test: [CMD, rabbitmq-diagnostics, -q, ping]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+
+  producer:
+    build: .
+    command: [uvicorn, producer_service.main:app, --host, 0.0.0.0, --port, '8000']
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: haproxy:9093
+      RABBITMQ_URL: amqp://lab:${RABBITMQ_PASSWORD}@rabbitmq:5672/
+    depends_on:
+      init-topics:
+        condition: service_completed_successfully
+      haproxy:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+    ports: ['127.0.0.1:8020:8000']
+
+  consumer:
+    build: .
+    command: [uvicorn, consumer_service.main:app, --host, 0.0.0.0, --port, '8001']
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: haproxy:9093
+      RABBITMQ_URL: amqp://lab:${RABBITMQ_PASSWORD}@rabbitmq:5672/
+      PROCESSING_DELAY: '1'
+    depends_on:
+      init-topics:
+        condition: service_completed_successfully
+      haproxy:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+    ports: ['127.0.0.1:8021:8001']
+
+volumes:
+  kafka-data:
+  rabbit-data:

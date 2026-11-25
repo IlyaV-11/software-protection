@@ -1,0 +1,100 @@
+{
+  "run_id": "parallel-1ea46604",
+  "messages": 5,
+  "processing_delay_s": 1,
+  "elapsed_s": 2.018,
+  "events": [
+    {
+      "event_id": "e5d43f49-11f9-4737-b123-4cc3af391d20",
+      "run_id": "parallel-1ea46604",
+      "transport": "kafka",
+      "topic": "orders",
+      "data": {
+        "order_id": 100,
+        "user_id": 100,
+        "product": "Parallel",
+        "quantity": 1
+      },
+      "delivery_ms": 6.087,
+      "processing_ms": 1004.28,
+      "total_ms": 1010.367,
+      "completed_at": "2026-11-25T12:35:02.683815+00:00",
+      "partition": 1,
+      "offset": 0
+    },
+    {
+      "event_id": "90319f9d-82e0-42df-9540-d45d34a0efde",
+      "run_id": "parallel-1ea46604",
+      "transport": "kafka",
+      "topic": "orders",
+      "data": {
+        "order_id": 101,
+        "user_id": 100,
+        "product": "Parallel",
+        "quantity": 1
+      },
+      "delivery_ms": 1010.568,
+      "processing_ms": 1000.482,
+      "total_ms": 2011.05,
+      "completed_at": "2026-11-25T12:35:03.688782+00:00",
+      "partition": 0,
+      "offset": 0
+    },
+    {
+      "event_id": "12b8de6d-caf1-4aa4-bf6a-6aad2c4557dd",
+      "run_id": "parallel-1ea46604",
+      "transport": "kafka",
+      "topic": "orders",
+      "data": {
+        "order_id": 103,
+        "user_id": 100,
+        "product": "Parallel",
+        "quantity": 1
+      },
+      "delivery_ms": 1008.941,
+      "processing_ms": 1000.689,
+      "total_ms": 2009.63,
+      "completed_at": "2026-11-25T12:35:03.688992+00:00",
+      "partition": 0,
+      "offset": 1
+    },
+    {
+      "event_id": "e33bf2cf-40b1-4847-8ed3-10d41f96b6fd",
+      "run_id": "parallel-1ea46604",
+      "transport": "kafka",
+      "topic": "orders",
+      "data": {
+        "order_id": 102,
+        "user_id": 100,
+        "product": "Parallel",
+        "quantity": 1
+      },
+      "delivery_ms": 1009.764,
+      "processing_ms": 1000.736,
+      "total_ms": 2010.499,
+      "completed_at": "2026-11-25T12:35:03.689042+00:00",
+      "partition": 1,
+      "offset": 1
+    },
+    {
+      "event_id": "fe73fc23-c89e-4142-84c7-f4171f53ab38",
+      "run_id": "parallel-1ea46604",
+      "transport": "kafka",
+      "topic": "orders",
+      "data": {
+        "order_id": 104,
+        "user_id": 100,
+        "product": "Parallel",
+        "quantity": 1
+      },
+      "delivery_ms": 1009.141,
+      "processing_ms": 1000.766,
+      "total_ms": 2009.907,
+      "completed_at": "2026-11-25T12:35:03.689075+00:00",
+      "partition": 1,
+      "offset": 2
+    }
+  ],
+  "global_peak_parallel_tasks": 6,
+  "peak_parallel_in_this_run": 4
+}

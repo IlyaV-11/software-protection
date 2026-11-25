@@ -1,0 +1,16 @@
+consumer-1  | INFO:     172.18.0.1:52522 - "GET /events/?run_id=benchmark-7ff13ba9 HTTP/1.1" 200 OK
+consumer-1  | INFO:     172.18.0.1:47720 - "GET /health HTTP/1.1" 200 OK
+consumer-1  | INFO:     kafka orders processed: {"order_id": 1, "user_id": 100, "product": "Laptop", "quantity": 1}
+consumer-1  | INFO:     kafka notifications processed: {"user_id": 100, "message": "Your order has been processed"}
+consumer-1  | INFO:     kafka errors processed: {"service": "payment", "message": "Payment timeout", "severity": "error"}
+consumer-1  | INFO:     rabbitmq orders processed: {"order_id": 1, "user_id": 100, "product": "Laptop", "quantity": 1}
+consumer-1  | INFO:     rabbitmq notifications processed: {"user_id": 100, "message": "Your order has been processed"}
+consumer-1  | INFO:     rabbitmq errors processed: {"service": "payment", "message": "Payment timeout", "severity": "error"}
+consumer-1  | INFO:     172.18.0.1:47724 - "GET /orders/ HTTP/1.1" 200 OK
+consumer-1  | INFO:     172.18.0.1:47740 - "GET /notifications/ HTTP/1.1" 200 OK
+consumer-1  | INFO:     172.18.0.1:47756 - "GET /errors/ HTTP/1.1" 200 OK
+consumer-1  | INFO:     172.18.0.1:47758 - "GET /rabbit/orders/ HTTP/1.1" 200 OK
+consumer-1  | INFO:     172.18.0.1:47774 - "GET /rabbit/notifications/ HTTP/1.1" 200 OK
+consumer-1  | INFO:     172.18.0.1:47784 - "GET /rabbit/errors/ HTTP/1.1" 200 OK
+consumer-1  | INFO:     172.18.0.1:47800 - "GET /events/?run_id=postman-1795610179986 HTTP/1.1" 200 OK
+consumer-1  | INFO:     kafka orders processed: {"order_id": 9999, "user_id": 100, "product": "Timeout test", "quantity": 1}

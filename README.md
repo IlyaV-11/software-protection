@@ -12,7 +12,7 @@
 | 1 | [Git. Организация проекта: ветвление, слияние, удалённый репозиторий](practices/practice-01) |
 | 2 | [Развёртывание GitLab и GitLab Runner на виртуальной машине](practices/practice-02) |
 | 3 | [FastAPI, Postman, интеграции](practices/practice-03) |
-| 4 | Apache Kafka, HAProxy, RabbitMQ |
+| 4 | [Apache Kafka, HAProxy, RabbitMQ](practices/practice-04) |
 | 5 | Автоматический контроль качества: pytest, линтеры, форматеры |
 
 Код, инструкции по запуску и результаты каждой работы добавляются в отдельную папку.

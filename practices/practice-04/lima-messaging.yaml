@@ -1,0 +1,32 @@
+minimumLimaVersion: 2.0.0
+base:
+- template:_images/ubuntu-22.04
+vmType: vz
+arch: aarch64
+cpus: 4
+memory: 4GiB
+disk: 20GiB
+mounts: []
+containerd:
+  system: false
+  user: false
+ssh:
+  localPort: 2223
+  loadDotSSHPubKeys: false
+portForwards:
+- guestPort: 8020
+  hostPort: 8020
+  hostIP: 127.0.0.1
+- guestPort: 8021
+  hostPort: 8021
+  hostIP: 127.0.0.1
+- guestPort: 8088
+  hostPort: 8088
+  hostIP: 127.0.0.1
+- guestPort: 15672
+  hostPort: 15672
+  hostIP: 127.0.0.1
+- guestIP: 0.0.0.0
+  proto: any
+  guestPortRange: [1, 65535]
+  ignore: true

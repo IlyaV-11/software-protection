@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-25",
+  "tool": "Postman Desktop 12.38.3",
+  "requests": 16,
+  "passed": 32,
+  "failed": 0,
+  "errors": 0,
+  "duration_ms": 2756,
+  "average_response_ms": 9,
+  "run_id": "postman-1795610179986",
+  "source": "Наблюдение реального интерфейса Postman; снимки 03, 05 и 06."
+}

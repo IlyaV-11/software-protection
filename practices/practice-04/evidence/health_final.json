@@ -1,0 +1,14 @@
+{
+  "producer": {
+    "status": "healthy",
+    "kafka_bootstrap_servers": "haproxy:9093",
+    "rabbitmq_connected": true
+  },
+  "consumer": {
+    "status": "healthy",
+    "active_tasks": 0,
+    "peak_parallel_tasks": 6,
+    "processed": 64,
+    "processing_delay_s": 1.0
+  }
+}
