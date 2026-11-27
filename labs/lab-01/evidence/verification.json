@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-27",
+  "diagram_count": 3,
+  "editable_vector_elements": true,
+  "element_ids_unique": true,
+  "semantic_flow_endpoints_valid": true,
+  "use_cases": 13,
+  "user_roles": 4,
+  "external_systems": 2,
+  "service_replicas": {
+    "Auth Service": {
+      "AZ1": 1,
+      "AZ2": 1
+    },
+    "Course Service": {
+      "AZ1": 1,
+      "AZ2": 1
+    },
+    "Payment Service": 1,
+    "Notification Service": 1
+  },
+  "excalidraw_canvas_review": [
+    "01_use_case",
+    "02_dfd",
+    "03_deployment"
+  ],
+  "screenshots": 3,
+  "deployed_cloud_services": false,
+  "files": {
+    "01_use_case.svg": "a5c4870f0ffe1b9fcbe5918dda6109ecdf2fded3368970c346ac70b2286aaae3",
+    "03_deployment.excalidraw": "e53786a542c01cb3a3901f2f0956fcd6ed21dee913c21b8025f7acbb154b96b6",
+    "01_use_case.png": "9ead1abb52906e41db9c66b17f9500d08c400d38cb3dbae91de7367d817caa27",
+    "02_dfd.excalidraw": "a479cb8df841ef99527264ba5f2a9619ee106d562f252d87cc0e0592ae770a1b",
+    "01_use_case.excalidraw": "7c706c384499b23ca921866c59bb6ddccee07626e394167a3c0202f0a4e1a9a9",
+    "03_deployment.svg": "b55dd86a04dbd1ae177e491057f0c80214905846729f92795fb180028bf6969e",
+    "02_dfd.png": "d431f8a8bfbe0156c3e0f395c2797950ebb16d5d3decad5f2c0d1b6c981ca236",
+    "02_dfd.svg": "0e2aa971b089466c46c8b1d7b1fd849c7def87393aa47ef278f49a7ce572b1fb",
+    "03_deployment.png": "6a4dfaa13d772bbc95d93cefdbb96a1b5a0c27bbddf3bfd7238ce743e99e5767"
+  },
+  "report_pages": 13,
+  "report_figures": 6,
+  "tables_centered": true,
+  "preserve_only_package_parts_unchanged": true,
+  "report_sha256": "ba7c5febaf48802171726b47e0ccc9a851da83a3dad7e6dc26d264d68b9205bc"
+}

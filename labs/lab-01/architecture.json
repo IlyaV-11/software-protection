@@ -1,0 +1,268 @@
+{
+  "system": "EduCloud",
+  "student": "Вахрушев И.А.",
+  "group": "25-КМ-ИБ2",
+  "diagrams": [
+    {
+      "file": "01_use_case.excalidraw",
+      "elements": 76,
+      "nodes": {
+        "courses": "01_use_case-004",
+        "pay": "01_use_case-006",
+        "materials": "01_use_case-008",
+        "login": "01_use_case-010",
+        "archive": "01_use_case-012",
+        "discount": "01_use_case-014",
+        "upload": "01_use_case-016",
+        "update": "01_use_case-018",
+        "stats": "01_use_case-020",
+        "users": "01_use_case-022",
+        "payments": "01_use_case-024",
+        "monitor": "01_use_case-026",
+        "restart": "01_use_case-028",
+        "student": "01_use_case-030",
+        "teacher": "01_use_case-036",
+        "admin": "01_use_case-042",
+        "technician": "01_use_case-048",
+        "stripe": "01_use_case-069",
+        "sendgrid": "01_use_case-071"
+      },
+      "flows": [
+        {
+          "from": "discount",
+          "to": "pay",
+          "label": "«extend»\nпри наличии промокода",
+          "bidirectional": false
+        }
+      ]
+    },
+    {
+      "file": "02_dfd.excalidraw",
+      "elements": 72,
+      "nodes": {
+        "client": "02_dfd-004",
+        "gateway": "02_dfd-006",
+        "auth": "02_dfd-008",
+        "course": "02_dfd-010",
+        "payment": "02_dfd-012",
+        "notify": "02_dfd-014",
+        "postgres": "02_dfd-016",
+        "redis": "02_dfd-019",
+        "registry": "02_dfd-022",
+        "sftp": "02_dfd-024",
+        "stripe": "02_dfd-026",
+        "sendgrid": "02_dfd-028"
+      },
+      "flows": [
+        {
+          "from": "client",
+          "to": "gateway",
+          "label": "REST /\nответ",
+          "bidirectional": true
+        },
+        {
+          "from": "gateway",
+          "to": "auth",
+          "label": "Данные входа / JWT",
+          "bidirectional": true
+        },
+        {
+          "from": "gateway",
+          "to": "course",
+          "label": "Курсы /\nматериалы",
+          "bidirectional": true
+        },
+        {
+          "from": "auth",
+          "to": "postgres",
+          "label": "Пользователи",
+          "bidirectional": true
+        },
+        {
+          "from": "auth",
+          "to": "redis",
+          "label": "Сессии",
+          "bidirectional": true
+        },
+        {
+          "from": "course",
+          "to": "postgres",
+          "label": "Курсы",
+          "bidirectional": true
+        },
+        {
+          "from": "gateway",
+          "to": "payment",
+          "label": "Запрос оплаты / статус",
+          "bidirectional": true
+        },
+        {
+          "from": "payment",
+          "to": "stripe",
+          "label": "Платёж / результат",
+          "bidirectional": true
+        },
+        {
+          "from": "payment",
+          "to": "notify",
+          "label": "Событие оплаты",
+          "bidirectional": false
+        },
+        {
+          "from": "notify",
+          "to": "sendgrid",
+          "label": "Письмо /\nстатус",
+          "bidirectional": true
+        },
+        {
+          "from": "gateway",
+          "to": "sftp",
+          "label": "Архив / файл\nSFTP в VPN",
+          "bidirectional": true
+        },
+        {
+          "from": "auth",
+          "to": "registry",
+          "label": "Регистрация\nимя и адрес",
+          "bidirectional": false
+        },
+        {
+          "from": "course",
+          "to": "registry",
+          "label": "Регистрация",
+          "bidirectional": false
+        },
+        {
+          "from": "gateway",
+          "to": "registry",
+          "label": "Адреса сервисов\nзапрос / ответ",
+          "bidirectional": true
+        }
+      ]
+    },
+    {
+      "file": "03_deployment.excalidraw",
+      "elements": 67,
+      "nodes": {
+        "client": "03_deployment-004",
+        "lb": "03_deployment-006",
+        "gateway": "03_deployment-008",
+        "auth1": "03_deployment-014",
+        "course1": "03_deployment-016",
+        "auth2": "03_deployment-018",
+        "course2": "03_deployment-020",
+        "payment": "03_deployment-022",
+        "notify": "03_deployment-024",
+        "registry": "03_deployment-026",
+        "postgres": "03_deployment-028",
+        "redis": "03_deployment-030",
+        "vpn": "03_deployment-032",
+        "stripe": "03_deployment-034",
+        "sendgrid": "03_deployment-036",
+        "firewall": "03_deployment-040",
+        "sftp": "03_deployment-042"
+      },
+      "flows": [
+        {
+          "from": "client",
+          "to": "lb",
+          "label": "HTTPS :443",
+          "bidirectional": false
+        },
+        {
+          "from": "lb",
+          "to": "gateway",
+          "label": null,
+          "bidirectional": false
+        },
+        {
+          "from": "gateway",
+          "to": "auth1",
+          "label": null,
+          "bidirectional": false
+        },
+        {
+          "from": "gateway",
+          "to": "course1",
+          "label": null,
+          "bidirectional": false
+        },
+        {
+          "from": "gateway",
+          "to": "auth2",
+          "label": null,
+          "bidirectional": false
+        },
+        {
+          "from": "gateway",
+          "to": "course2",
+          "label": null,
+          "bidirectional": false
+        },
+        {
+          "from": "gateway",
+          "to": "payment",
+          "label": null,
+          "bidirectional": false
+        },
+        {
+          "from": "gateway",
+          "to": "vpn",
+          "label": null,
+          "bidirectional": false
+        },
+        {
+          "from": "payment",
+          "to": "stripe",
+          "label": "HTTPS :443",
+          "bidirectional": false
+        },
+        {
+          "from": "payment",
+          "to": "notify",
+          "label": null,
+          "bidirectional": false
+        },
+        {
+          "from": "notify",
+          "to": "sendgrid",
+          "label": "HTTPS :443",
+          "bidirectional": false
+        },
+        {
+          "from": "vpn",
+          "to": "firewall",
+          "label": "IPsec VPN\nSFTP :22 внутри туннеля",
+          "bidirectional": false
+        },
+        {
+          "from": "firewall",
+          "to": "sftp",
+          "label": null,
+          "bidirectional": true
+        }
+      ]
+    }
+  ],
+  "replicas": {
+    "Auth Service": {
+      "AZ1": 1,
+      "AZ2": 1
+    },
+    "Course Service": {
+      "AZ1": 1,
+      "AZ2": 1
+    },
+    "Payment Service": 1,
+    "Notification Service": 1
+  },
+  "external_systems": [
+    "Stripe",
+    "SendGrid"
+  ],
+  "hybrid_archive": {
+    "protocol": "SFTP",
+    "port": 22,
+    "tunnel": "IPsec VPN"
+  }
+}
